@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Laboratorio XSS</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <header class="page-header">
+        <h1>Laboratorio XSS</h1>
+        <p class="lead">
+          Demostracion educativa de Cross-Site Scripting.<br />
+          Ingresa texto o un payload HTML/JS y observa la diferencia entre
+          un formulario seguro y uno vulnerable.
+        </p>
+      </header>
+
+      <!-- FORMULARIO SEGURO -->
+      <section class="card safe">
+        <div class="badge safe-badge">&#10004; Seguro — textContent</div>
+        <h2>Formulario con proteccion XSS</h2>
+        <p class="desc">
+          Renderiza la entrada con <code>textContent</code>.<br />
+          Los caracteres especiales se escapan automaticamente: nunca
+          se interpreta HTML ni se ejecuta JavaScript.
+        </p>
+        <form id="safe-form" class="stack">
+          <label for="safe-input">Escribe tu nombre o un payload XSS</label>
+          <input
+            id="safe-input"
+            type="text"
+            placeholder='<img src=x onerror="alert(1)">'
+            autocomplete="off"
+          />
+          <div class="btn-row">
+            <button type="submit">Mostrar</button>
+            <button type="button" id="safe-clear" class="secondary">Limpiar</button>
+          </div>
+        </form>
+        <p class="output-label">Salida:</p>
+        <div id="safe-output" class="output" aria-live="polite"></div>
+        <details class="explanation">
+          <summary>Por que es seguro</summary>
+          <p>
+            <code>element.textContent = userInput</code> trata el valor como
+            texto plano. El navegador convierte <code>&lt;</code>,
+            <code>&gt;</code> y <code>&amp;</code> en entidades HTML antes
+            de renderizar, por lo que ningun tag ni script se ejecuta.
+          </p>
+        </details>
+      </section>
+
+      <!-- FORMULARIO VULNERABLE -->
+      <section class="card vuln">
+        <div class="badge vuln-badge">&#10008; Vulnerable — innerHTML</div>
+        <h2>Formulario vulnerable a XSS</h2>
+        <div class="warning-box" role="alert">
+          &#9888; Esta seccion es deliberadamente insegura con fines educativos.
+          Usala solo en entorno local controlado.
+        </div>
+        <p class="desc">
+          Renderiza la entrada con <code>innerHTML</code> sin ninguna
+          sanitizacion.<br />
+          Permite inyectar HTML arbitrario y ejecutar JavaScript en el
+          contexto del navegador.
+        </p>
+        <form id="vuln-form" class="stack">
+          <label for="vuln-input">Escribe tu nombre o un payload XSS</label>
+          <input
+            id="vuln-input"
+            type="text"
+            placeholder='<img src=x onerror="alert(&#39;XSS!&#39;)">'
+            autocomplete="off"
+          />
+          <div class="btn-row">
+            <button type="submit" class="danger">Mostrar (sin proteccion)</button>
+            <button type="button" id="vuln-clear" class="secondary">Limpiar</button>
+          </div>
+        </form>
+        <p class="output-label">Salida (innerHTML sin escape):</p>
+        <div id="vuln-output" class="output" aria-live="polite"></div>
+        <details class="explanation">
+          <summary>Por que es vulnerable</summary>
+          <p>
+            <code>element.innerHTML = userInput</code> interpreta el valor
+            como HTML. Un atacante puede inyectar etiquetas y controladores
+            de eventos para ejecutar codigo arbitrario en el navegador
+            de la victima.
+          </p>
+          <p>Payloads de ejemplo:</p>
+          <ul>
+            <li><code>&lt;b&gt;texto en negrita&lt;/b&gt;</code></li>
+            <li><code>&lt;img src=x onerror="alert('XSS!')"&gt;</code></li>
+            <li><code>&lt;svg onload="alert(document.cookie)"&gt;&lt;/svg&gt;</code></li>
+          </ul>
+        </details>
+      </section>
+    </main>
+    <script src="app.js"></script>
+  </body>
+</html>

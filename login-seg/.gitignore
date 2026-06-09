@@ -1,0 +1,5 @@
+node_modules/
+.env
+data/auth.db
+data/auth.db-shm
+data/auth.db-wal

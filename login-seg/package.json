@@ -1,0 +1,24 @@
+{
+  "name": "login-seg",
+  "version": "1.0.0",
+  "description": "Demo de login seguro con OWASP Authentication Cheat Sheet",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node --watch server/index.js",
+    "test": "echo \"Sin tests automatizados\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "argon2": "^0.44.0",
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.5.2",
+    "helmet": "^8.2.0",
+    "sqlite3": "^6.0.1"
+  }
+}

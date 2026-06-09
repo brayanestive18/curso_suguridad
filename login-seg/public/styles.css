@@ -1,0 +1,138 @@
+:root {
+  --bg-1: #f7f2e9;
+  --bg-2: #e7dcc7;
+  --ink: #1d2126;
+  --muted: #59616a;
+  --card: #fffdf9;
+  --line: #d8cebc;
+  --accent: #176089;
+  --accent-2: #114967;
+  --alert: #8a2d2d;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 12% 10%, #ffffffaa 0, #ffffff00 40%),
+    radial-gradient(circle at 85% 75%, #d9e8f0 0, #d9e8f000 36%),
+    linear-gradient(135deg, var(--bg-1), var(--bg-2));
+  min-height: 100vh;
+}
+
+.shell {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.card {
+  width: min(560px, 100%);
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 24px 40px rgba(17, 28, 38, 0.12);
+}
+
+h1,
+h2 {
+  margin: 0;
+}
+
+h1 {
+  font-size: 1.9rem;
+}
+
+h2 {
+  font-size: 1.2rem;
+}
+
+.lead {
+  margin-top: 10px;
+  color: var(--muted);
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--line);
+  margin: 24px 0;
+}
+
+.stack {
+  display: grid;
+  gap: 10px;
+}
+
+label {
+  font-weight: 600;
+  margin-top: 8px;
+}
+
+input {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  font-size: 1rem;
+  padding: 12px;
+}
+
+input:focus {
+  outline: 2px solid #83b6d1;
+  border-color: var(--accent);
+}
+
+button {
+  margin-top: 10px;
+  border: 0;
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 1rem;
+  color: #fff;
+  background: var(--accent);
+  cursor: pointer;
+}
+
+button:hover {
+  background: var(--accent-2);
+}
+
+button:disabled {
+  background: #7a8a98;
+  cursor: not-allowed;
+}
+
+button.secondary {
+  background: #3a5a40;
+}
+
+button.secondary:hover {
+  background: #2f4934;
+}
+
+.captcha-container {
+  min-height: 66px;
+  margin-top: 6px;
+}
+
+.message {
+  min-height: 20px;
+  font-weight: 600;
+  color: var(--alert);
+}
+
+@media (max-width: 600px) {
+  .card {
+    padding: 18px;
+    border-radius: 14px;
+  }
+
+  h1 {
+    font-size: 1.6rem;
+  }
+}

@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Seguro</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <script
+      src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
+      async
+      defer
+    ></script>
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <main class="shell">
+      <section class="card">
+        <h1>Login seguro</h1>
+        <p class="lead">
+          Demo OWASP Authentication Cheat Sheet: captcha, mensajes genericos y
+          hashing seguro de contrasenas.
+        </p>
+
+        <form id="login-form" class="stack">
+          <label for="login-email">Email</label>
+          <input id="login-email" name="email" type="email" required />
+
+          <label for="login-password">Contrasena</label>
+          <input
+            id="login-password"
+            name="password"
+            type="password"
+            autocomplete="current-password"
+            required
+          />
+
+          <div id="captcha-container" class="captcha-container"></div>
+
+          <button type="submit">Iniciar sesion</button>
+          <p id="login-message" class="message" role="status" aria-live="polite"></p>
+        </form>
+
+        <hr />
+
+        <form id="register-form" class="stack">
+          <h2>Crear cuenta</h2>
+
+          <label for="register-email">Email</label>
+          <input id="register-email" name="email" type="email" required />
+
+          <label for="register-password">Contrasena (12+ caracteres)</label>
+          <input
+            id="register-password"
+            name="password"
+            type="password"
+            autocomplete="new-password"
+            minlength="12"
+            required
+          />
+
+          <button type="submit" class="secondary">Registrar</button>
+          <p id="register-message" class="message" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>

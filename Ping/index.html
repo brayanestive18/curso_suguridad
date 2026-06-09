@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ping Seguro vs Vulnerable</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="layout">
+      <header class="hero">
+        <p class="tag">Laboratorio OWASP</p>
+        <h1>Ping Seguro y Ping Vulnerable</h1>
+        <p>
+          Esta pagina muestra dos formularios en paralelo: uno protege contra
+          command injection siguiendo lineamientos de OWASP y el otro deja la
+          entrada sin controles para fines educativos.
+        </p>
+      </header>
+
+      <section class="grid">
+        <article class="card safe">
+          <h2>1) Formulario Seguro (OWASP)</h2>
+          <ul>
+            <li>Validacion positiva (allowlist) de IPv4 o hostname.</li>
+            <li>Bloqueo de metacaracteres peligrosos.</li>
+            <li>Limite de longitud y normalizacion de entrada.</li>
+            <li>Simulacion de uso de comando parametrizado.</li>
+          </ul>
+
+          <form id="safeForm" novalidate>
+            <label for="safeTarget">IP o hostname</label>
+            <input
+              id="safeTarget"
+              name="safeTarget"
+              type="text"
+              inputmode="text"
+              placeholder="Ej: 8.8.8.8"
+              autocomplete="off"
+              required
+            />
+            <button type="submit">Ejecutar ping seguro</button>
+          </form>
+
+          <div class="output" id="safeOutput" aria-live="polite"></div>
+        </article>
+
+        <article class="card vuln">
+          <h2>2) Formulario Vulnerable</h2>
+          <ul>
+            <li>Sin validacion de entrada.</li>
+            <li>Concatena la entrada directamente al comando.</li>
+            <li>Muestra como aparece la inyeccion.</li>
+          </ul>
+
+          <form id="vulnForm">
+            <label for="vulnTarget">IP o texto libre</label>
+            <input
+              id="vulnTarget"
+              name="vulnTarget"
+              type="text"
+              placeholder="Ej: 8.8.8.8 & whoami"
+              autocomplete="off"
+              required
+            />
+            <button type="submit">Ejecutar ping vulnerable</button>
+          </form>
+
+          <div class="output" id="vulnOutput" aria-live="polite"></div>
+        </article>
+      </section>
+
+      <section class="notes">
+        <h3>Nota importante</h3>
+        <p>
+          En una aplicacion real, la proteccion debe implementarse en backend
+          antes de ejecutar comandos del sistema. Este laboratorio usa
+          simulacion en JavaScript para explicar el riesgo.
+        </p>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
